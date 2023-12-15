@@ -177,11 +177,15 @@ app.put('/videos/:id', (req: RequestWithBodyAndParams<{ id: string }, UpdateVide
     } else {
         minAgeRestriction = null
     }
+    if(typeof publicationDate === 'number'){
+        errors.errorsMessages.push({message: 'Invalid publicationDate', field: 'publicationDate'})
 
+    }
     if (errors.errorsMessages.length) {
         res.status(400).send(errors)
         return;
     }
+
     const videoIndex = videos.findIndex(v => v.id === +req.params.id)
     const video = videos.find(v => v.id === +req.params.id)
 
