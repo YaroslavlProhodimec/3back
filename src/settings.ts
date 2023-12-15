@@ -197,3 +197,24 @@ app.put('/videos/:id', (req: RequestWithBodyAndParams<{ id: string }, UpdateVide
 
     res.sendStatus(204)
 })
+
+app.delete('/videos/:id', (req: RequestWithParams<{id:string}>, res: Response) => {
+    const id = +req.params.id
+
+    const indexId = videos.findIndex((el)=> el.id === id)
+    const element = videos.find((el) => el.id === id)
+
+    if(!element){
+        res.sendStatus(404)
+        return;
+    }
+
+    videos.splice(indexId,1)
+    res.sendStatus(204)
+
+})
+
+
+
+
+
