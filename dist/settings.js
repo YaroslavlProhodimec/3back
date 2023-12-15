@@ -36,18 +36,18 @@ exports.app.get('/videos/:id', (req, res) => {
 });
 exports.app.post('/videos', (req, res) => {
     let errors = {
-        errorMessages: []
+        errorsMessages: []
     };
     let { title, author, availableResolutions } = req.body;
     if (!title || !title.trim() || title.trim().length > 40) {
-        errors.errorMessages.push({ message: 'Invalid title', field: 'title' });
+        errors.errorsMessages.push({ message: 'Invalid title', field: 'title' });
     }
     if (!author || !author.trim() || author.trim().length > 20) {
-        errors.errorMessages.push({ message: 'Invalid author', field: 'author' });
+        errors.errorsMessages.push({ message: 'Invalid author', field: 'author' });
     }
     if (Array.isArray(availableResolutions)) {
         availableResolutions.map((el) => {
-            !AvailableResolutions.includes(el) && errors.errorMessages.push({
+            !AvailableResolutions.includes(el) && errors.errorsMessages.push({
                 message: "Invalid availableResolutions",
                 field: 'availableResolutions'
             });
@@ -56,7 +56,7 @@ exports.app.post('/videos', (req, res) => {
     else {
         availableResolutions = [];
     }
-    if (errors.errorMessages.length) {
+    if (errors.errorsMessages.length) {
         res.status(400).send(errors);
         return;
     }
@@ -78,18 +78,18 @@ exports.app.post('/videos', (req, res) => {
 });
 exports.app.put('/videos/:id', (req, res) => {
     let errors = {
-        errorMessages: []
+        errorsMessages: []
     };
     let { title, author, availableResolutions, publicationDate, minAgeRestriction, canBeDownloaded } = req.body;
     if (!title || !title.trim() || title.trim().length > 40) {
-        errors.errorMessages.push({ 'message': 'Invalid title', 'field': 'title' }, { 'message': 'Invalid canBeDownloaded', 'field': "canBeDownloaded" });
+        errors.errorsMessages.push({ message: 'Invalid title', field: 'title' }, { message: 'Invalid canBeDownloaded', field: "canBeDownloaded" });
     }
     if (!author || !author.trim() || author.trim().length > 20) {
-        errors.errorMessages.push({ message: 'Invalid author', field: 'author' });
+        errors.errorsMessages.push({ message: 'Invalid author', field: 'author' });
     }
     if (Array.isArray(availableResolutions)) {
         availableResolutions.map((el) => {
-            !AvailableResolutions.includes(el) && errors.errorMessages.push({
+            !AvailableResolutions.includes(el) && errors.errorsMessages.push({
                 message: "Invalid availableResolutions",
                 field: 'availableResolutions'
             });
@@ -103,7 +103,7 @@ exports.app.put('/videos/:id', (req, res) => {
     }
     if (typeof minAgeRestriction !== 'undefined' && typeof minAgeRestriction === 'number') {
         minAgeRestriction < 1 ||
-            minAgeRestriction > 18 && errors.errorMessages.push({
+            minAgeRestriction > 18 && errors.errorsMessages.push({
                 message: "Invalid minAgeRestriction",
                 field: 'minAgeRestriction'
             });
@@ -111,7 +111,7 @@ exports.app.put('/videos/:id', (req, res) => {
     else {
         minAgeRestriction = null;
     }
-    if (errors.errorMessages.length) {
+    if (errors.errorsMessages.length) {
         res.status(400).send(errors);
         return;
     }
