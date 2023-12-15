@@ -93,7 +93,7 @@ app.post('/videos', (req: RequestWithBody<Body>, res: Response) => {
         availableResolutions = []
     }
     if (errors.errorMessages.length) {
-        res.sendStatus(400).send(errors)
+        res.status(400).send(errors)
         return;
     }
 
@@ -141,7 +141,8 @@ app.put('/videos/:id', (req: RequestWithBodyAndParams<{ id: string }, UpdateVide
     } = req.body
 
     if (!title || !title.trim() || title.trim().length > 40) {
-        errors.errorMessages.push({message: 'Invalid title', field: 'title'})
+        errors.errorMessages.push({message: 'Invalid title', field: 'title'},
+            { message: 'Invalid canBeDownloaded', field: "canBeDownloaded" })
     }
     if (!author || !author.trim() || author.trim().length > 20) {
         errors.errorMessages.push({message: 'Invalid author', field: 'author'})
@@ -171,10 +172,9 @@ app.put('/videos/:id', (req: RequestWithBodyAndParams<{ id: string }, UpdateVide
     } else {
         minAgeRestriction = null
     }
-
     if (errors.errorMessages.length) {
         res.status(400).send(errors)
-        return
+        return;
     }
     const videoIndex = videos.findIndex(v => v.id === +req.params.id)
     const video = videos.find(v => v.id === +req.params.id)
