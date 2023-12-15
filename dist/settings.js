@@ -82,7 +82,7 @@ exports.app.put('/videos/:id', (req, res) => {
     };
     let { title, author, availableResolutions, publicationDate, minAgeRestriction, canBeDownloaded } = req.body;
     if (!title || !title.trim() || title.trim().length > 40) {
-        errors.errorsMessages.push({ message: 'Invalid title', field: 'title' }, { message: 'Invalid canBeDownloaded', field: "canBeDownloaded" });
+        errors.errorsMessages.push({ message: 'Invalid title', field: 'title' });
     }
     if (!author || !author.trim() || author.trim().length > 20) {
         errors.errorsMessages.push({ message: 'Invalid author', field: 'author' });
@@ -100,6 +100,9 @@ exports.app.put('/videos/:id', (req, res) => {
     }
     if (typeof canBeDownloaded === 'undefined') {
         canBeDownloaded = false;
+    }
+    if (typeof canBeDownloaded === 'string') {
+        errors.errorsMessages.push({ message: 'Invalid canBeDownloaded', field: 'canBeDownloaded' });
     }
     if (typeof minAgeRestriction !== 'undefined' && typeof minAgeRestriction === 'number') {
         minAgeRestriction < 1 ||

@@ -142,7 +142,7 @@ app.put('/videos/:id', (req: RequestWithBodyAndParams<{ id: string }, UpdateVide
 
     if (!title || !title.trim() || title.trim().length > 40) {
         errors.errorsMessages.push({message: 'Invalid title', field: 'title'},
-            { message: 'Invalid canBeDownloaded', field: "canBeDownloaded" })
+        )
     }
 
     if (!author || !author.trim() || author.trim().length > 20) {
@@ -162,6 +162,10 @@ app.put('/videos/:id', (req: RequestWithBodyAndParams<{ id: string }, UpdateVide
     }
     if (typeof canBeDownloaded === 'undefined') {
         canBeDownloaded = false
+    }
+    if (typeof canBeDownloaded === 'string') {
+        errors.errorsMessages.push({message: 'Invalid canBeDownloaded', field: 'canBeDownloaded'})
+
     }
     if (typeof minAgeRestriction !== 'undefined' && typeof minAgeRestriction === 'number'
     ) {
@@ -200,18 +204,18 @@ app.put('/videos/:id', (req: RequestWithBodyAndParams<{ id: string }, UpdateVide
     res.sendStatus(204)
 })
 
-app.delete('/videos/:id', (req: RequestWithParams<{id:string}>, res: Response) => {
+app.delete('/videos/:id', (req: RequestWithParams<{ id: string }>, res: Response) => {
     const id = +req.params.id
 
-    const indexId = videos.findIndex((el)=> el.id === id)
+    const indexId = videos.findIndex((el) => el.id === id)
     const element = videos.find((el) => el.id === id)
 
-    if(!element){
+    if (!element) {
         res.sendStatus(404)
         return;
     }
 
-    videos.splice(indexId,1)
+    videos.splice(indexId, 1)
     res.sendStatus(204)
 
 })
