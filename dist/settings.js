@@ -139,3 +139,6 @@ exports.app.delete('/videos/:id', (req, res) => {
     videos.splice(indexId, 1);
     res.sendStatus(204);
 });
+exports.app.delete('/testing/all-data', (req, res) => {
+    res.status(204).send('All data is deleted');
+});

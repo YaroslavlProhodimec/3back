@@ -192,7 +192,6 @@ app.put('/videos/:id', (req: RequestWithBodyAndParams<{ id: string }, UpdateVide
         availableResolutions,
         publicationDate: publicationDate ? publicationDate : video.publicationDate
     }
-
     videos.splice(videoIndex, 1, updateItem)
 
     res.sendStatus(204)
@@ -212,6 +211,12 @@ app.delete('/videos/:id', (req: RequestWithParams<{id:string}>, res: Response) =
     videos.splice(indexId,1)
     res.sendStatus(204)
 
+})
+
+app.delete('/testing/all-data', (req: Request, res: Response) => {
+
+
+    res.status(204).send('All data is deleted');
 })
 
 
