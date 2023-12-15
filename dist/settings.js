@@ -22,6 +22,7 @@ const videos = [
     }
 ];
 exports.app.get('/videos', (req, res) => {
+    res.status(200);
     res.send(videos);
 });
 exports.app.use(express_1.default.json());
@@ -56,7 +57,7 @@ exports.app.post('/videos', (req, res) => {
         availableResolutions = [];
     }
     if (errors.errorMessages.length) {
-        res.sendStatus(404).send(errors);
+        res.sendStatus(400).send(errors);
         return;
     }
     const createdAt = new Date();
@@ -111,13 +112,13 @@ exports.app.put('/videos/:id', (req, res) => {
         minAgeRestriction = null;
     }
     if (errors.errorMessages.length) {
-        res.sendStatus(404).send(errors);
+        res.status(400).send(errors);
         return;
     }
     const videoIndex = videos.findIndex(v => v.id === +req.params.id);
     const video = videos.find(v => v.id === +req.params.id);
     if (!video) {
-        res.sendStatus(404);
+        res.sendStatus(400);
         return;
     }
     const updateItem = Object.assign(Object.assign({}, video), { canBeDownloaded,

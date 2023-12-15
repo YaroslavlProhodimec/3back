@@ -49,6 +49,7 @@ const videos: Array<VideoType> = [
 ]
 
 app.get('/videos', (req: Request, res: Response) => {
+    res.status(200)
     res.send(videos)
 })
 app.use(express.json())
@@ -92,7 +93,7 @@ app.post('/videos', (req: RequestWithBody<Body>, res: Response) => {
         availableResolutions = []
     }
     if (errors.errorMessages.length) {
-        res.sendStatus(404).send(errors)
+        res.sendStatus(400).send(errors)
         return;
     }
 
@@ -172,14 +173,14 @@ app.put('/videos/:id', (req: RequestWithBodyAndParams<{ id: string }, UpdateVide
     }
 
     if (errors.errorMessages.length) {
-        res.sendStatus(404).send(errors)
+        res.status(400).send(errors)
         return
     }
     const videoIndex = videos.findIndex(v => v.id === +req.params.id)
     const video = videos.find(v => v.id === +req.params.id)
 
     if (!video) {
-        res.sendStatus(404)
+        res.sendStatus(400)
         return;
     }
 
