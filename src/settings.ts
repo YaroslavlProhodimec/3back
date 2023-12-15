@@ -186,7 +186,7 @@ app.put('/videos/:id', (req: RequestWithBodyAndParams<{ id: string }, UpdateVide
     const video = videos.find(v => v.id === +req.params.id)
 
     if (!video) {
-        res.sendStatus(400)
+        res.sendStatus(404)
         return;
     }
 

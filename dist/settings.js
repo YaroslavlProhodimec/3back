@@ -121,7 +121,7 @@ exports.app.put('/videos/:id', (req, res) => {
     const videoIndex = videos.findIndex(v => v.id === +req.params.id);
     const video = videos.find(v => v.id === +req.params.id);
     if (!video) {
-        res.sendStatus(400);
+        res.sendStatus(404);
         return;
     }
     const updateItem = Object.assign(Object.assign({}, video), { canBeDownloaded,
