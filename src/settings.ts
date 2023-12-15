@@ -1,11 +1,10 @@
 import express, {Request, Response} from "express";
-import {type} from "os";
 
 export const app = express()
 const AvailableResolutions = ['P144', 'P240', 'P360', 'P480', 'P720', 'P1080', 'P1440', 'P2160']
 type VideoType = {
-    id: number,
-    title: string,
+    id?: number,
+    title?: string,
     author: string,
     canBeDownloaded: boolean,
     minAgeRestriction: null | number,
@@ -34,18 +33,19 @@ type  ErrorMessageType = {
 }
 
 const videos: Array<VideoType> = [
-    {
-        id: 1,
-        title: "string",
-        author: "string",
-        canBeDownloaded: true,
-        minAgeRestriction: null,
-        createdAt: "2023-12-14T23:03:10.177Z",
-        publicationDate: "2023-12-14T23:03:10.177Z",
-        availableResolutions: [
-            "P144"
-        ]
-    }
+    // {
+    //     // title: "string",
+    //     author: "string",
+    //     availableResolutions: [
+    //         "P144"
+    //     ],
+    //     canBeDownloaded: true,
+    //
+    //     createdAt: "2023-12-14T23:03:10.177Z",
+    //     minAgeRestriction: null,
+    //     publicationDate: "2023-12-14T23:03:10.177Z",
+    //
+    // }
 ]
 
 app.get('/videos', (req: Request, res: Response) => {
