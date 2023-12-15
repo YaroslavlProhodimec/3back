@@ -82,7 +82,7 @@ exports.app.put('/videos/:id', (req, res) => {
     };
     let { title, author, availableResolutions, publicationDate, minAgeRestriction, canBeDownloaded } = req.body;
     if (!title || !title.trim() || title.trim().length > 40) {
-        errors.errorMessages.push({ message: 'Invalid title', field: 'title' }, { message: 'Invalid canBeDownloaded', field: "canBeDownloaded" });
+        errors.errorMessages.push({ 'message': 'Invalid title', 'field': 'title' }, { 'message': 'Invalid canBeDownloaded', 'field': "canBeDownloaded" });
     }
     if (!author || !author.trim() || author.trim().length > 20) {
         errors.errorMessages.push({ message: 'Invalid author', field: 'author' });
