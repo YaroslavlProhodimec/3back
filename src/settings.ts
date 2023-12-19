@@ -51,24 +51,36 @@ app.get('/api/blogs/:id', (req: Request, res: Response) => {
 
     let found =  blogs.find((el)=>el.id === +req.params.id)
     if(!found){
-
+        res.sendStatus(404)
     }
     res.status(200).send(blogs)
 
 })
 
-
 app.post('/api/blogs',blogPostValidation, (req: any, res: any) => {
 
     const errors = validationResult(req)
-
-    console.log(errors,'errors')
-    console.log('errors','errors')
     if(!errors.isEmpty()){
         return res.status(400).json({errors:errors.array()})
     }
     blogs.push(req.body)
     res.status(201).send(blogs)
+})
+
+app.put('/api/blogs/:id',blogPostValidation, (req: any, res: any) => {
+    let found =  blogs.find((el)=>el.id === +req.params.id)
+
+    if(!found) {
+        res.sendStatus(404)
+        return;
+    }
+
+    const errors = validationResult(req)
+    if(!errors.isEmpty()){
+        return res.status(400).json({errors:errors.array()})
+    }
+    blogs.push(req.body)
+    res.sendStatus(204)
 })
 
 app.delete('/api/blogs/delete', (req: Request, res: Response) => {
