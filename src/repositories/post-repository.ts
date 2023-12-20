@@ -17,7 +17,7 @@ export class PostRepository {
 
         db.posts.push(post)
 
-        return post
+        return {...post}
     }
 
     static deletePost(id: string) {

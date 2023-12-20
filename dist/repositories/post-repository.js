@@ -12,7 +12,7 @@ class PostRepository {
             return Object.assign(Object.assign({}, foundedPost), { id: post.id });
         }
         db_1.db.posts.push(post);
-        return post;
+        return Object.assign({}, post);
     }
     static deletePost(id) {
         let foundedIndexPost = db_1.db.posts.findIndex(b => b.id === id);
