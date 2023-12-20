@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BlogRepository = void 0;
 const db_1 = require("../db/db");
+const uuid_1 = require("uuid");
 class BlogRepository {
     static getAllBlogs() {
         return db_1.db.blogs;
@@ -11,7 +12,7 @@ class BlogRepository {
         if (existingBlog) {
             return Object.assign(Object.assign({}, existingBlog), { id: existingBlog.id });
         }
-        const newBlog = Object.assign(Object.assign({}, blog), { id: new Date() });
+        const newBlog = Object.assign(Object.assign({}, blog), { id: generateUniqueId() });
         db_1.db.blogs.push(newBlog);
         return Object.assign({}, newBlog);
     }
@@ -43,3 +44,6 @@ class BlogRepository {
     }
 }
 exports.BlogRepository = BlogRepository;
+function generateUniqueId() {
+    return (0, uuid_1.v4)();
+}

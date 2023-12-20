@@ -1,6 +1,6 @@
 import {db} from '../db/db'
 import {BlogType} from "../types/blog/output";
-
+import { v4 as uuidv4 } from 'uuid';
 export class BlogRepository {
 
     static getAllBlogs() {
@@ -12,7 +12,7 @@ export class BlogRepository {
         if (existingBlog) {
             return { ...existingBlog, id: existingBlog.id };
         }
-        const newBlog = {...blog,id:new Date()}
+        const newBlog = {...blog,id:generateUniqueId()}
         db.blogs.push(newBlog)
         return {...newBlog}
     }
@@ -50,5 +50,8 @@ export class BlogRepository {
         }
         return blog
     }
+}
+function generateUniqueId(): string {
+    return uuidv4();
 }
 
