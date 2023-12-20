@@ -10,10 +10,11 @@ export class BlogRepository {
     static addBlog(blog: BlogType) {
         const existingBlog = db.blogs.find((b) => b.id === blog.id);
         if (existingBlog) {
-            return { ...existingBlog };
+            return { ...existingBlog, id: existingBlog.id };
         }
-        db.blogs.push(blog)
-        return blog
+        const newBlog = {...blog,id:+(new Date())}
+        db.blogs.push(newBlog)
+        return {...newBlog}
     }
 
     static deleteBlog(id: string) {
