@@ -60,5 +60,5 @@ export const blogNameValidation = body('blogName')
     .isString().trim()
     .withMessage('Incorrect URL blogName');
 
-export const postValidation = () => [idValidation, titleValidation,shortDescriptionValidation,
-    contentValidation,blogIdValidation,blogNameValidation,inputModelValidation]
+export const postValidation = () => [ titleValidation,shortDescriptionValidation,
+    contentValidation,inputModelValidation]

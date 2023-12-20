@@ -58,6 +58,6 @@ exports.blogNameValidation = (0, express_validator_1.body)('blogName')
     // .exists()
     .isString().trim()
     .withMessage('Incorrect URL blogName');
-const postValidation = () => [exports.idValidation, exports.titleValidation, exports.shortDescriptionValidation,
-    exports.contentValidation, exports.blogIdValidation, exports.blogNameValidation, input_model_validation_1.inputModelValidation];
+const postValidation = () => [exports.titleValidation, exports.shortDescriptionValidation,
+    exports.contentValidation, input_model_validation_1.inputModelValidation];
 exports.postValidation = postValidation;
