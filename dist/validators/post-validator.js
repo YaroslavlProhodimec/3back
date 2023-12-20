@@ -38,8 +38,12 @@ exports.postValidation = exports.blogNameValidation = exports.blogIdValidation =
 const express_validator_1 = require("express-validator");
 const input_model_validation_1 = require("../middlewares/input-model-validation/input-model-validation");
 exports.idValidation = (0, express_validator_1.body)('id')
-    // .exists()
+    .exists()
     .isString().trim()
+    // .isLength({
+    // min: 1,
+    // max: 15
+    // })
     .withMessage('Incorrect id');
 exports.titleValidation = (0, express_validator_1.body)('title').exists().isString().trim().isLength({ max: 30 }).withMessage('Incorrect title');
 exports.shortDescriptionValidation = (0, express_validator_1.body)('shortDescription').exists()
@@ -59,6 +63,11 @@ exports.blogNameValidation = (0, express_validator_1.body)('blogName')
     // .exists()
     .isString().trim()
     .withMessage('Incorrect URL blogName');
-const postValidation = () => [exports.idValidation, exports.titleValidation, exports.shortDescriptionValidation,
-    exports.contentValidation, exports.blogIdValidation, exports.blogNameValidation, input_model_validation_1.inputModelValidation];
+const postValidation = () => [
+    // idValidation,
+    exports.titleValidation, exports.shortDescriptionValidation,
+    exports.contentValidation,
+    // blogIdValidation,blogNameValidation,
+    input_model_validation_1.inputModelValidation
+];
 exports.postValidation = postValidation;
