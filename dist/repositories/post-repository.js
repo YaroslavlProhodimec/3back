@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PostRepository = void 0;
 const db_1 = require("../db/db");
+const blog_repository_1 = require("./blog-repository");
 class PostRepository {
     static getAllPosts() {
         return db_1.db.posts;
@@ -11,7 +12,7 @@ class PostRepository {
         if (foundedPost) {
             return Object.assign(Object.assign({}, foundedPost), { id: post.id });
         }
-        db_1.db.posts.push(post);
+        db_1.db.posts.push(Object.assign(Object.assign({}, post), { id: (0, blog_repository_1.generateUniqueId)(), blogId: (0, blog_repository_1.generateUniqueId)(), blogName: (0, blog_repository_1.generateUniqueId)() }));
         return Object.assign({}, post);
     }
     static deletePost(id) {

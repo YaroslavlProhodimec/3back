@@ -1,5 +1,6 @@
 import {db} from '../db/db'
 import {BlogType} from "../types/blog/output";
+import {generateUniqueId} from "./blog-repository";
 
 export class PostRepository {
 
@@ -15,7 +16,7 @@ export class PostRepository {
             return  {...foundedPost,id:post.id}
         }
 
-        db.posts.push(post)
+        db.posts.push({...post,id:generateUniqueId(),blogId:generateUniqueId(),blogName:generateUniqueId()})
 
         return {...post}
     }

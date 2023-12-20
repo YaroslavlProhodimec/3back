@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BlogRepository = void 0;
+exports.generateUniqueId = exports.BlogRepository = void 0;
 const db_1 = require("../db/db");
 const uuid_1 = require("uuid");
 class BlogRepository {
@@ -47,3 +47,4 @@ exports.BlogRepository = BlogRepository;
 function generateUniqueId() {
     return (0, uuid_1.v4)();
 }
+exports.generateUniqueId = generateUniqueId;

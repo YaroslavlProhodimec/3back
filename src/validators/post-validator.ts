@@ -38,7 +38,7 @@ import {body} from 'express-validator';
 import {inputModelValidation} from "../middlewares/input-model-validation/input-model-validation";
 
 export const idValidation = body('id')
-    .exists()
+    .optional()
     .isString().trim()
     // .isLength({
     // min: 1,
@@ -63,14 +63,16 @@ export const blogIdValidation = body('blogId')
     .withMessage('Incorrect URL blogId');
 export const blogNameValidation = body('blogName')
     // .exists()
+    .optional()
 
     .isString().trim()
     .withMessage('Incorrect URL blogName');
 
 export const postValidation = () => [
-    // idValidation,
+    idValidation,
     titleValidation,shortDescriptionValidation,
     contentValidation,
     blogIdValidation,
-    // blogNameValidation,
-    inputModelValidation]
+    blogNameValidation,
+    inputModelValidation
+]

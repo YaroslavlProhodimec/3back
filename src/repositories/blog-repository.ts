@@ -49,7 +49,7 @@ export class BlogRepository {
         return blog
     }
 }
-function generateUniqueId(): string {
+export function generateUniqueId(): string {
     return uuidv4();
 }
 
