@@ -11,7 +11,7 @@ postRoute.get('/posts', (req: Request, res: Response) => {
     res.status(200).send(posts)
 })
 
-postRoute.post('/posts', authMiddleware,  (req: Request, res: Response) => {
+postRoute.post('/posts', authMiddleware,postValidation(),  (req: Request, res: Response) => {
     const blogs = PostRepository.addPost(req.body)
     res.status(201).send(blogs)
 })

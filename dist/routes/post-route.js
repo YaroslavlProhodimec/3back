@@ -10,7 +10,7 @@ exports.postRoute.get('/posts', (req, res) => {
     const posts = post_repository_1.PostRepository.getAllPosts();
     res.status(200).send(posts);
 });
-exports.postRoute.post('/posts', auth_middleware_1.authMiddleware, (req, res) => {
+exports.postRoute.post('/posts', auth_middleware_1.authMiddleware, (0, post_validator_1.postValidation)(), (req, res) => {
     const blogs = post_repository_1.PostRepository.addPost(req.body);
     res.status(201).send(blogs);
 });
