@@ -15,7 +15,8 @@ exports.app.use(post_route_1.postRoute);
 // /ht_02/api/testing/all-data
 exports.app.delete('/testing/all-data', (req, res) => {
     (0, db_1.clearAllData)();
-    res.status(200).send('All data is deleted');
+    res.sendStatus(204);
+    // .send('All data is deleted');
 });
 // app.get('/api/blogs', (req: Request, res: Response) => {
 //

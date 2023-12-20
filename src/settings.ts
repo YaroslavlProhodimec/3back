@@ -11,7 +11,8 @@ app.use(postRoute)
 // /ht_02/api/testing/all-data
 app.delete('/testing/all-data', (req: Request, res: Response) => {
     clearAllData();
-    res.status(200).send('All data is deleted');
+    res.sendStatus(204)
+        // .send('All data is deleted');
 })
 
 
