@@ -8,7 +8,15 @@ export class PostRepository {
     }
 
     static addPost(post: PostType) {
+
+        const foundedPost = db.posts.find((el)=>el.id === post.id)
+
+        if(foundedPost){
+            return  {...foundedPost,id:post.id}
+        }
+
         db.posts.push(post)
+
         return post
     }
 

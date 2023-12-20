@@ -7,6 +7,10 @@ class PostRepository {
         return db_1.db.posts;
     }
     static addPost(post) {
+        const foundedPost = db_1.db.posts.find((el) => el.id === post.id);
+        if (foundedPost) {
+            return Object.assign(Object.assign({}, foundedPost), { id: post.id });
+        }
         db_1.db.posts.push(post);
         return post;
     }
