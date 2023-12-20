@@ -9,7 +9,7 @@ export class BlogRepository {
 
     static addBlog(blog: BlogType) {
         db.blogs.push(blog)
-        return blog
+        return db.blogs
     }
 
     static deleteBlog(id: string) {

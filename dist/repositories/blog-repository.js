@@ -8,7 +8,7 @@ class BlogRepository {
     }
     static addBlog(blog) {
         db_1.db.blogs.push(blog);
-        return blog;
+        return db_1.db.blogs;
     }
     static deleteBlog(id) {
         let foundedIndexBlog = db_1.db.blogs.findIndex(b => b.id === id);
