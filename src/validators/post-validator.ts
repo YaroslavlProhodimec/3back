@@ -39,10 +39,7 @@ import {inputModelValidation} from "../middlewares/input-model-validation/input-
 
 export const idValidation = body('id')
     // .exists()
-    .isString().trim().isLength({
-    min: 1,
-    max: 15
-}).withMessage('Incorrect id')
+ .withMessage('Incorrect id')
 
 export const titleValidation = body('title').exists().isString().trim().isLength({max:30}).withMessage('Incorrect title')
 export const shortDescriptionValidation = body('shortDescription').exists()

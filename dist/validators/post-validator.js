@@ -39,10 +39,7 @@ const express_validator_1 = require("express-validator");
 const input_model_validation_1 = require("../middlewares/input-model-validation/input-model-validation");
 exports.idValidation = (0, express_validator_1.body)('id')
     // .exists()
-    .isString().trim().isLength({
-    min: 1,
-    max: 15
-}).withMessage('Incorrect id');
+    .withMessage('Incorrect id');
 exports.titleValidation = (0, express_validator_1.body)('title').exists().isString().trim().isLength({ max: 30 }).withMessage('Incorrect title');
 exports.shortDescriptionValidation = (0, express_validator_1.body)('shortDescription').exists()
     .isString().trim()
