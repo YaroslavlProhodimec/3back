@@ -5,42 +5,51 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.app = void 0;
 const express_1 = __importDefault(require("express"));
-const blogs_validator_1 = require("./validators/blogs-validator");
-const express_validator_1 = require("express-validator");
+const blog_route_1 = require("./routes/blog-route");
+const post_route_1 = require("./routes/post-route");
 exports.app = (0, express_1.default)();
-const AvailableResolutions = ['P144', 'P240', 'P360', 'P480', 'P720', 'P1080', 'P1440', 'P2160'];
 exports.app.use(express_1.default.json());
-const blogs = [
-    {
-        id: 0,
-        name: "string",
-        description: "string",
-        websiteUrl: "string"
-    }
-];
-exports.app.get('/api/blogs', (req, res) => {
-    res.status(200).send(blogs);
-});
-exports.app.get('/api/blogs/:id', (req, res) => {
-    let found = blogs.find((el) => el.id === +req.params.id);
-    if (!found) {
-    }
-    res.status(200).send(blogs);
-});
-exports.app.post('/api/blogs', blogs_validator_1.blogPostValidation, (req, res) => {
-    const errors = (0, express_validator_1.validationResult)(req);
-    console.log(errors, 'errors');
-    console.log('errors', 'errors');
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
-    blogs.push(req.body);
-    res.status(201).send(blogs);
-});
-exports.app.delete('/api/blogs/delete', (req, res) => {
-    blogs.length = 0;
-    res.status(204);
-});
+exports.app.use(blog_route_1.blogRoute);
+exports.app.use(post_route_1.postRoute);
+// app.get('/api/blogs', (req: Request, res: Response) => {
+//
+//     res.status(200).send(blogs)
+//
+// })
+// app.get('/api/blogs/:id', authMiddleware, (req: Request, res: Response) => {
+//
+//     let found = blogs.find((el) => el.id === +req.params.id)
+//     if (!found) {
+//         res.sendStatus(404)
+//     }
+//     res.status(200).send(blogs)
+//
+// })
+// app.post('/api/blogs', authMiddleware, blogPostValidation(), (req: any, res: any) => {
+//
+//     blogs.push(req.body)
+//     res.status(201).send(blogs)
+// })
+// app.put('/api/blogs/:id', blogPostValidation(), (req: any, res: any) => {
+//     let found = blogs.find((el) => el.id === +req.params.id)
+//
+//     if (!found) {
+//         res.sendStatus(404)
+//         return;
+//     }
+//
+//     const errors = validationResult(req)
+//     if (!errors.isEmpty()) {
+//         return res.status(400).json({errors: errors.array()})
+//     }
+//     blogs.push(req.body)
+//     res.sendStatus(204)
+// })
+//
+// app.delete('/api/blogs/delete', (req: Request, res: Response) => {
+//     blogs.length = 0
+//     res.status(204)
+// })
 //
 // app.get('/videos/:id', (req: RequestWithParams<{ id: string }>, res: Response) => {
 //

@@ -1,92 +1,57 @@
 import express, {Request, Response} from "express";
 import {blogPostValidation} from "./validators/blogs-validator";
 import {validationResult} from "express-validator";
+import {authMiddleware} from "./middlewares/auth/auth-middleware";
+import {blogRoute} from "./routes/blog-route";
+import {postRoute} from "./routes/post-route";
 
 export const app = express()
-const AvailableResolutions = ['P144', 'P240', 'P360', 'P480', 'P720', 'P1080', 'P1440', 'P2160']
 app.use(express.json())
+app.use(blogRoute)
+app.use(postRoute)
 
-type ViewModel = {
-    id: number,
-    name: string,
-    description: string,
-    websiteUrl: string
-}
 
-type RequestWithBody<B> = Request<{}, {}, B, {}>
-type RequestWithParams<P> = Request<P, {}, {}, {}>
-type RequestWithBodyAndParams<P, B> = Request<P, {}, B, {}>
-type Body =
-    {
-        title: string,
-        author: string,
-        availableResolutions: typeof AvailableResolutions
-    }
+// app.get('/api/blogs', (req: Request, res: Response) => {
+//
+//     res.status(200).send(blogs)
+//
+// })
+// app.get('/api/blogs/:id', authMiddleware, (req: Request, res: Response) => {
+//
+//     let found = blogs.find((el) => el.id === +req.params.id)
+//     if (!found) {
+//         res.sendStatus(404)
+//     }
+//     res.status(200).send(blogs)
+//
+// })
 
-type  ErrorType = {
-    errorsMessages: ErrorMessageType[]
-}
+// app.post('/api/blogs', authMiddleware, blogPostValidation(), (req: any, res: any) => {
+//
+//     blogs.push(req.body)
+//     res.status(201).send(blogs)
+// })
 
-type  ErrorMessageType = {
-    field: string
-    message: string
-}
-
-const blogs: Array<ViewModel> = [
-    {
-        id: 0,
-        name: "string",
-        description: "string",
-        websiteUrl: "string"
-    }
-
-]
-
-app.get('/api/blogs', (req: Request, res: Response) => {
-
-    res.status(200).send(blogs)
-
-})
-app.get('/api/blogs/:id', (req: Request, res: Response) => {
-
-    let found =  blogs.find((el)=>el.id === +req.params.id)
-    if(!found){
-        res.sendStatus(404)
-    }
-    res.status(200).send(blogs)
-
-})
-
-app.post('/api/blogs',blogPostValidation, (req: any, res: any) => {
-
-    const errors = validationResult(req)
-    if(!errors.isEmpty()){
-        return res.status(400).json({errors:errors.array()})
-    }
-    blogs.push(req.body)
-    res.status(201).send(blogs)
-})
-
-app.put('/api/blogs/:id',blogPostValidation, (req: any, res: any) => {
-    let found =  blogs.find((el)=>el.id === +req.params.id)
-
-    if(!found) {
-        res.sendStatus(404)
-        return;
-    }
-
-    const errors = validationResult(req)
-    if(!errors.isEmpty()){
-        return res.status(400).json({errors:errors.array()})
-    }
-    blogs.push(req.body)
-    res.sendStatus(204)
-})
-
-app.delete('/api/blogs/delete', (req: Request, res: Response) => {
-   blogs.length = 0
-    res.status(204)
-})
+// app.put('/api/blogs/:id', blogPostValidation(), (req: any, res: any) => {
+//     let found = blogs.find((el) => el.id === +req.params.id)
+//
+//     if (!found) {
+//         res.sendStatus(404)
+//         return;
+//     }
+//
+//     const errors = validationResult(req)
+//     if (!errors.isEmpty()) {
+//         return res.status(400).json({errors: errors.array()})
+//     }
+//     blogs.push(req.body)
+//     res.sendStatus(204)
+// })
+//
+// app.delete('/api/blogs/delete', (req: Request, res: Response) => {
+//     blogs.length = 0
+//     res.status(204)
+// })
 
 //
 // app.get('/videos/:id', (req: RequestWithParams<{ id: string }>, res: Response) => {
