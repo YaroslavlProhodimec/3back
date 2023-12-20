@@ -45,6 +45,7 @@ class BlogRepository {
 }
 exports.BlogRepository = BlogRepository;
 function generateUniqueId() {
-    return (0, uuid_1.v4)();
+    const fullUUID = (0, uuid_1.v4)();
+    return fullUUID.slice(0, 28);
 }
 exports.generateUniqueId = generateUniqueId;

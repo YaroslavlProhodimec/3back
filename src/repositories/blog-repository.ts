@@ -50,6 +50,7 @@ export class BlogRepository {
     }
 }
 export function generateUniqueId(): string {
-    return uuidv4();
+    const fullUUID = uuidv4();
+    return fullUUID.slice(0, 28);
 }
 
