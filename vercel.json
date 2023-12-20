@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "3back",
+  "name": "4back",
   "builds": [
     {
       "src": "src/index.ts",
