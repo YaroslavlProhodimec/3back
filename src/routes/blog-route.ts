@@ -2,11 +2,11 @@ import {Router, Request, Response} from "express";
 import {BlogParams} from "../types/blog/input";
 import {BlogRepository} from "../repositories/blog-repository";
 import {authMiddleware} from "../middlewares/auth/auth-middleware";
-import {blogPostValidation} from "../validators/blogs-validator";
+import {blogPostValidation, idParamsValidation} from "../validators/blogs-validator";
 
 export const blogRoute = Router({})
 
-blogRoute.get('/blogs', (req: Request, res: Response) => {
+blogRoute.get('/blogs',(req: Request, res: Response) => {
     const blogs = BlogRepository.getAllBlogs()
     res.status(200).send(blogs)
 })
@@ -16,14 +16,14 @@ blogRoute.post('/blogs',authMiddleware,blogPostValidation(),(req: Request, res: 
     res.status(201).send(blogs)
 })
 
-blogRoute.delete('/blogs/:id',authMiddleware,(req: Request<BlogParams>, res: Response) => {
+blogRoute.delete('/blogs/:id',authMiddleware,idParamsValidation,(req: Request<BlogParams>, res: Response) => {
     const blogs = BlogRepository.deleteBlog(req.params.id)
     if(!blogs){
         res.sendStatus(404)
     }
     res.sendStatus(204)
 })
-blogRoute.put('/blogs/:id',authMiddleware,blogPostValidation(),(req: Request<BlogParams>, res: Response) => {
+blogRoute.put('/blogs/:id',authMiddleware,blogPostValidation(),idParamsValidation,(req: Request<BlogParams>, res: Response) => {
     const blogs = BlogRepository.updateBlogs(req.params.id,req.body)
 
     if (!blogs) {
@@ -32,7 +32,7 @@ blogRoute.put('/blogs/:id',authMiddleware,blogPostValidation(),(req: Request<Blo
     res.sendStatus(204)
 })
 
-blogRoute.get('/blogs/:id',(req: Request<BlogParams>, res: Response) => {
+blogRoute.get('/blogs/:id',idParamsValidation, (req: Request<BlogParams>, res: Response) => {
     const id = req.params.id
     const blog = BlogRepository.getBlogsById(id)
 

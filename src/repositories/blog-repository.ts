@@ -16,7 +16,6 @@ export class BlogRepository {
         db.blogs.push(newBlog)
         return {...newBlog}
     }
-
     static deleteBlog(id: string) {
         let foundedIndexBlog: any = db.blogs.findIndex(b => b.id === id)
         db.blogs.splice(foundedIndexBlog, 1)
