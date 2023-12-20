@@ -1,5 +1,4 @@
 import {db} from '../db/db'
-import {BlogType} from "../types/blog/output";
 import {generateUniqueId} from "./blog-repository";
 
 export class PostRepository {

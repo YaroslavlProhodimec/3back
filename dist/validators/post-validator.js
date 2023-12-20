@@ -45,7 +45,7 @@ exports.idValidation = (0, express_validator_1.body)('id')
     // max: 15
     // })
     .withMessage('Incorrect id');
-exports.titleValidation = (0, express_validator_1.body)('title').exists().isString().trim().isLength({ max: 30 }).withMessage('Incorrect title');
+exports.titleValidation = (0, express_validator_1.body)('title').exists().isString().trim().isLength({ min: 1, max: 30 }).withMessage('Incorrect title');
 exports.shortDescriptionValidation = (0, express_validator_1.body)('shortDescription').exists()
     .isString().trim()
     .isLength({ max: 100 })
@@ -53,7 +53,7 @@ exports.shortDescriptionValidation = (0, express_validator_1.body)('shortDescrip
 exports.contentValidation = (0, express_validator_1.body)('content')
     .exists()
     .isString().trim()
-    .isLength({ max: 1000 })
+    .isLength({ min: 1, max: 1000 })
     .withMessage('Incorrect URL content');
 exports.blogIdValidation = (0, express_validator_1.body)('blogId')
     .optional()
