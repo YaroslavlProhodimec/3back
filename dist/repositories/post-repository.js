@@ -12,7 +12,7 @@ class PostRepository {
         if (foundedPost) {
             return Object.assign(Object.assign({}, foundedPost), { id: post.id });
         }
-        let newPosts = Object.assign(Object.assign({}, post), { id: (0, blog_repository_1.generateUniqueId)(), blogId: (0, blog_repository_1.generateUniqueId)(), blogName: (0, blog_repository_1.generateUniqueId)() });
+        let newPosts = Object.assign(Object.assign({}, post), { id: (0, blog_repository_1.generateUniqueId)(), blogId: '1', blogName: (0, blog_repository_1.generateUniqueId)() });
         db_1.db.posts.push(newPosts);
         return Object.assign({}, newPosts);
     }

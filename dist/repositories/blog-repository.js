@@ -27,12 +27,12 @@ class BlogRepository {
     static updateBlogs(id, blog) {
         let foundedIndexBlog = db_1.db.blogs.findIndex(b => b.id === id);
         let foundedBlog = db_1.db.blogs.find(b => b.id === id);
-        let { id: blogId, name, description, websiteUrl } = blog;
-        const updatedBlogs = Object.assign(Object.assign({}, foundedBlog), { name, description, websiteUrl });
-        db_1.db.blogs.splice(foundedIndexBlog, 1, updatedBlogs);
-        if (!foundedBlog) {
+        let { name, description, websiteUrl } = blog;
+        if (foundedIndexBlog === -1) {
             return null;
         }
+        const updatedBlogs = Object.assign(Object.assign({}, foundedBlog), { name, description, websiteUrl });
+        db_1.db.blogs.splice(foundedIndexBlog, 1, updatedBlogs);
         return updatedBlogs;
     }
     static getBlogsById(id) {

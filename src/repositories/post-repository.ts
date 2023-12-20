@@ -14,7 +14,7 @@ export class PostRepository {
         if (foundedPost) {
             return {...foundedPost, id: post.id}
         }
-        let newPosts = {...post, id: generateUniqueId(), blogId: generateUniqueId(), blogName: generateUniqueId()}
+        let newPosts = {...post, id: generateUniqueId(), blogId:'1', blogName: generateUniqueId()}
         db.posts.push(newPosts)
 
         return {...newPosts}
