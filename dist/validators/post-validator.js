@@ -57,6 +57,7 @@ exports.contentValidation = (0, express_validator_1.body)('content')
     .withMessage('Incorrect URL content');
 exports.blogIdValidation = (0, express_validator_1.body)('blogId')
     // .exists()
+    .isLength({ max: 30 })
     .isString().trim()
     .withMessage('Incorrect URL blogId');
 exports.blogNameValidation = (0, express_validator_1.body)('blogName')
@@ -67,7 +68,8 @@ const postValidation = () => [
     // idValidation,
     exports.titleValidation, exports.shortDescriptionValidation,
     exports.contentValidation,
-    // blogIdValidation,blogNameValidation,
+    exports.blogIdValidation,
+    // blogNameValidation,
     input_model_validation_1.inputModelValidation
 ];
 exports.postValidation = postValidation;

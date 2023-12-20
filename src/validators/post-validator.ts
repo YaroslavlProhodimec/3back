@@ -58,6 +58,7 @@ export const contentValidation = body('content')
     .withMessage('Incorrect URL content');
 export const blogIdValidation = body('blogId')
     // .exists()
+    .isLength({max:30})
     .isString().trim()
     .withMessage('Incorrect URL blogId');
 export const blogNameValidation = body('blogName')
@@ -69,5 +70,6 @@ export const postValidation = () => [
     // idValidation,
     titleValidation,shortDescriptionValidation,
     contentValidation,
-    // blogIdValidation,blogNameValidation,
+    blogIdValidation,
+    // blogNameValidation,
     inputModelValidation]
