@@ -27,12 +27,13 @@ class PostRepository {
     static updatePost(id, blog) {
         let foundedIndexPost = db_1.db.posts.findIndex(b => b.id === id);
         let foundedPost = db_1.db.posts.find(b => b.id === id);
-        let { title, shortDescription, content, blogId } = blog;
-        const updatedPost = Object.assign(Object.assign({}, foundedPost), { title, shortDescription, content, blogId });
-        db_1.db.posts.splice(foundedIndexPost, 1, updatedPost);
-        if (!foundedPost) {
+        let { blogId, title, shortDescription, content, } = blog;
+        if (foundedIndexPost === -1) {
             return null;
         }
+        const updatedPost = Object.assign(Object.assign({}, foundedPost), { blogId,
+            title, shortDescription, content });
+        db_1.db.posts.splice(foundedIndexPost, 1, updatedPost);
         return updatedPost;
     }
     static getPostById(id) {

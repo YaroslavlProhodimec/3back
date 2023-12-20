@@ -9,12 +9,12 @@ export class PostRepository {
 
     static addPost(post: PostType) {
 
-        const foundedPost = db.posts.find((el)=> el.id === post.id)
+        const foundedPost = db.posts.find((el) => el.id === post.id)
 
-        if(foundedPost){
-            return  {...foundedPost,id:post.id}
+        if (foundedPost) {
+            return {...foundedPost, id: post.id}
         }
-        let newPosts = {...post,id:generateUniqueId(),blogId:generateUniqueId(),blogName:generateUniqueId()}
+        let newPosts = {...post, id: generateUniqueId(), blogId: generateUniqueId(), blogName: generateUniqueId()}
         db.posts.push(newPosts)
 
         return {...newPosts}
@@ -33,16 +33,16 @@ export class PostRepository {
     static updatePost(id: string, blog: PostType) {
         let foundedIndexPost: any = db.posts.findIndex(b => b.id === id)
         let foundedPost: any = db.posts.find(b => b.id === id)
-        let { title, shortDescription, content,blogId} = blog
+        let {blogId, title, shortDescription, content,} = blog
+        if (foundedIndexPost === -1) {
+            return null
+        }
         const updatedPost = {
-            ...foundedPost,
-            title, shortDescription, content,blogId,
+            ...foundedPost, blogId,
+            title, shortDescription, content,
         }
         db.posts.splice(foundedIndexPost, 1, updatedPost)
 
-        if (!foundedPost) {
-            return null
-        }
 
         return updatedPost
     }

@@ -43,34 +43,38 @@ export const idValidation = body('id')
     // .isLength({
     // min: 1,
     // max: 15
-// })
-.withMessage('Incorrect id')
+    // })
+    .withMessage('Incorrect id')
 
-export const titleValidation = body('title').exists().isString().trim().isLength({min:1,max:30}).withMessage('Incorrect title')
+export const titleValidation = body('title').exists().isString().trim().isLength({
+    min: 1,
+    max: 30
+}).withMessage('Incorrect title')
 export const shortDescriptionValidation = body('shortDescription').exists()
     .isString().trim()
-    .isLength({max:100})
+    .isLength({min:1,max: 100})
     .withMessage('Incorrect URL shortDescription');
 export const contentValidation = body('content')
     .exists()
     .isString().trim()
-    .isLength({min:1,max:1000})
+    .isLength({min: 1, max: 1000})
     .withMessage('Incorrect URL content');
+
 export const blogIdValidation = body('blogId')
     .optional()
-    .isLength({max:30})
+    .isLength({ max: 30})
     .isString().trim()
     .withMessage('Incorrect URL blogId');
+
 export const blogNameValidation = body('blogName')
     // .exists()
     .optional()
-
     .isString().trim()
     .withMessage('Incorrect URL blogName');
 
 export const postValidation = () => [
     idValidation,
-    titleValidation,shortDescriptionValidation,
+    titleValidation, shortDescriptionValidation,
     contentValidation,
     blogIdValidation,
     blogNameValidation,

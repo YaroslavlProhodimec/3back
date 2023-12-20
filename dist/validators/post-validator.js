@@ -45,10 +45,13 @@ exports.idValidation = (0, express_validator_1.body)('id')
     // max: 15
     // })
     .withMessage('Incorrect id');
-exports.titleValidation = (0, express_validator_1.body)('title').exists().isString().trim().isLength({ min: 1, max: 30 }).withMessage('Incorrect title');
+exports.titleValidation = (0, express_validator_1.body)('title').exists().isString().trim().isLength({
+    min: 1,
+    max: 30
+}).withMessage('Incorrect title');
 exports.shortDescriptionValidation = (0, express_validator_1.body)('shortDescription').exists()
     .isString().trim()
-    .isLength({ max: 100 })
+    .isLength({ min: 1, max: 100 })
     .withMessage('Incorrect URL shortDescription');
 exports.contentValidation = (0, express_validator_1.body)('content')
     .exists()
