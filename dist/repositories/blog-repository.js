@@ -7,8 +7,12 @@ class BlogRepository {
         return db_1.db.blogs;
     }
     static addBlog(blog) {
+        const existingBlog = db_1.db.blogs.find((b) => b.id === blog.id);
+        if (existingBlog) {
+            return Object.assign({}, existingBlog);
+        }
         db_1.db.blogs.push(blog);
-        return blog;
+        return Object.assign({}, blog);
     }
     static deleteBlog(id) {
         let foundedIndexBlog = db_1.db.blogs.findIndex(b => b.id === id);
