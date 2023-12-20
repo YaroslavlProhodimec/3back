@@ -28,7 +28,7 @@ exports.blogRoute.put('/blogs/:id', auth_middleware_1.authMiddleware, (0, blogs_
     }
     res.sendStatus(204);
 });
-exports.blogRoute.get('/blogs/:id', auth_middleware_1.authMiddleware, (0, blogs_validator_1.blogPostValidation)(), (req, res) => {
+exports.blogRoute.get('/blogs/:id', (0, blogs_validator_1.blogPostValidation)(), (req, res) => {
     const id = req.params.id;
     const blog = blog_repository_1.BlogRepository.getBlogsById(id);
     if (!blog) {

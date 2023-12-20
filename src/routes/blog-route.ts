@@ -32,7 +32,7 @@ blogRoute.put('/blogs/:id',authMiddleware,blogPostValidation(),(req: Request<Blo
     res.sendStatus(204)
 })
 
-blogRoute.get('/blogs/:id',authMiddleware,blogPostValidation(),(req: Request<BlogParams>, res: Response) => {
+blogRoute.get('/blogs/:id',blogPostValidation(),(req: Request<BlogParams>, res: Response) => {
     const id = req.params.id
     const blog = BlogRepository.getBlogsById(id)
 
