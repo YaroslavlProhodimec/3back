@@ -11,7 +11,7 @@ class BlogRepository {
         if (existingBlog) {
             return Object.assign(Object.assign({}, existingBlog), { id: existingBlog.id });
         }
-        const newBlog = Object.assign(Object.assign({}, blog), { id: +(new Date()) });
+        const newBlog = Object.assign(Object.assign({}, blog), { id: new Date() });
         db_1.db.blogs.push(newBlog);
         return Object.assign({}, newBlog);
     }

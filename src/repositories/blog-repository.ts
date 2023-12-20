@@ -12,7 +12,7 @@ export class BlogRepository {
         if (existingBlog) {
             return { ...existingBlog, id: existingBlog.id };
         }
-        const newBlog = {...blog,id:+(new Date())}
+        const newBlog = {...blog,id:new Date()}
         db.blogs.push(newBlog)
         return {...newBlog}
     }
