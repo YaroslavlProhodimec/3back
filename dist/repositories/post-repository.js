@@ -17,7 +17,7 @@ class PostRepository {
     static deletePost(id) {
         let foundedIndexPost = db_1.db.posts.findIndex(b => b.id === id);
         db_1.db.posts.splice(foundedIndexPost, 1);
-        if (!foundedIndexPost) {
+        if (foundedIndexPost === -1) {
             return null;
         }
         return foundedIndexPost;

@@ -23,7 +23,7 @@ export class PostRepository {
     static deletePost(id: string) {
         let foundedIndexPost: any = db.posts.findIndex(b => b.id === id)
         db.posts.splice(foundedIndexPost, 1)
-        if (!foundedIndexPost) {
+        if (foundedIndexPost === -1) {
             return null
         }
         return foundedIndexPost
