@@ -12,8 +12,9 @@ class PostRepository {
         if (foundedPost) {
             return Object.assign(Object.assign({}, foundedPost), { id: post.id });
         }
-        db_1.db.posts.push(Object.assign(Object.assign({}, post), { id: (0, blog_repository_1.generateUniqueId)(), blogId: (0, blog_repository_1.generateUniqueId)(), blogName: (0, blog_repository_1.generateUniqueId)() }));
-        return Object.assign({}, post);
+        let newPosts = Object.assign(Object.assign({}, post), { id: (0, blog_repository_1.generateUniqueId)(), blogId: (0, blog_repository_1.generateUniqueId)(), blogName: (0, blog_repository_1.generateUniqueId)() });
+        db_1.db.posts.push(newPosts);
+        return Object.assign({}, newPosts);
     }
     static deletePost(id) {
         let foundedIndexPost = db_1.db.posts.findIndex(b => b.id === id);

@@ -10,15 +10,15 @@ export class PostRepository {
 
     static addPost(post: PostType) {
 
-        const foundedPost = db.posts.find((el)=>el.id === post.id)
+        const foundedPost = db.posts.find((el)=> el.id === post.id)
 
         if(foundedPost){
             return  {...foundedPost,id:post.id}
         }
+        let newPosts = {...post,id:generateUniqueId(),blogId:generateUniqueId(),blogName:generateUniqueId()}
+        db.posts.push(newPosts)
 
-        db.posts.push({...post,id:generateUniqueId(),blogId:generateUniqueId(),blogName:generateUniqueId()})
-
-        return {...post}
+        return {...newPosts}
     }
 
     static deletePost(id: string) {
