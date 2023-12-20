@@ -9,12 +9,11 @@ export class BlogRepository {
 
     static addBlog(blog: BlogType) {
         const existingBlog = db.blogs.find((b) => b.id === blog.id);
-        // if (existingBlog) {
-        //     return { ...existingBlog };
-        // }
-       const res = db.blogs.push(blog)
-        // return { ...blog };
-        return res;
+        if (existingBlog) {
+            return { ...existingBlog };
+        }
+        db.blogs.push(blog)
+        return blog
     }
 
     static deleteBlog(id: string) {
