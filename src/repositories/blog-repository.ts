@@ -24,7 +24,6 @@ export class BlogRepository {
         }
         return foundedIndexBlog
     }
-
     static updateBlogs(id: string, blog: BlogType) {
         let foundedIndexBlog: any = db.blogs.findIndex(b => b.id === id)
         let foundedBlog: any = db.blogs.find(b => b.id === id)
