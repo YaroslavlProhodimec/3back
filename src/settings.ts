@@ -1,19 +1,16 @@
 import express, {Request, Response} from "express";
-import {blogPostValidation} from "./validators/blogs-validator";
-import {validationResult} from "express-validator";
-import {authMiddleware} from "./middlewares/auth/auth-middleware";
 import {blogRoute} from "./routes/blog-route";
 import {postRoute} from "./routes/post-route";
-import {BlogRepository} from "./repositories/blog-repository";
-import {db} from "./db/db";
+import {clearAllData} from "./db/db";
 
 export const app = express()
+
 app.use(express.json())
 app.use(blogRoute)
 app.use(postRoute)
 // /ht_02/api/testing/all-data
 app.delete('/testing/all-data', (req: Request, res: Response) => {
-
+    clearAllData();
     res.status(200).send('All data is deleted');
 })
 

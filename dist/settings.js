@@ -7,12 +7,14 @@ exports.app = void 0;
 const express_1 = __importDefault(require("express"));
 const blog_route_1 = require("./routes/blog-route");
 const post_route_1 = require("./routes/post-route");
+const db_1 = require("./db/db");
 exports.app = (0, express_1.default)();
 exports.app.use(express_1.default.json());
 exports.app.use(blog_route_1.blogRoute);
 exports.app.use(post_route_1.postRoute);
 // /ht_02/api/testing/all-data
 exports.app.delete('/testing/all-data', (req, res) => {
+    (0, db_1.clearAllData)();
     res.status(200).send('All data is deleted');
 });
 // app.get('/api/blogs', (req: Request, res: Response) => {
