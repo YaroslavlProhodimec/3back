@@ -4,11 +4,21 @@ import {validationResult} from "express-validator";
 import {authMiddleware} from "./middlewares/auth/auth-middleware";
 import {blogRoute} from "./routes/blog-route";
 import {postRoute} from "./routes/post-route";
+import {BlogRepository} from "./repositories/blog-repository";
+import {db} from "./db/db";
 
 export const app = express()
 app.use(express.json())
 app.use(blogRoute)
 app.use(postRoute)
+// /ht_02/api/testing/all-data
+app.delete('/testing/all-data', (req: Request, res: Response) => {
+
+    db = []
+    res.status(204).send('All data is deleted');
+})
+
+
 
 
 // app.get('/api/blogs', (req: Request, res: Response) => {

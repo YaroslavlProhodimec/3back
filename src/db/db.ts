@@ -6,7 +6,7 @@ type DBType = {
     posts: PostType[]
 }
 
-export const db: DBType = {
+export let db: DBType = {
     videos: [{
         id: 1,
         title: "string",
