@@ -31,7 +31,7 @@ postRoute.put('/posts/:id', authMiddleware, postValidation(), (req: Request<Blog
     res.sendStatus(204)
 })
 
-postRoute.get('/posts/:id', authMiddleware, (req: Request<BlogParams>, res: Response) => {
+postRoute.get('/posts/:id', (req: Request<BlogParams>, res: Response) => {
     const id = req.params.id
     const blog = PostRepository.getPostById(id)
 

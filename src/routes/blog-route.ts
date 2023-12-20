@@ -16,7 +16,7 @@ blogRoute.post('/blogs',authMiddleware,blogPostValidation(),(req: Request, res: 
     res.status(201).send(blogs)
 })
 
-blogRoute.delete('/blogs/:id',authMiddleware,blogPostValidation(),(req: Request<BlogParams>, res: Response) => {
+blogRoute.delete('/blogs/:id',authMiddleware,(req: Request<BlogParams>, res: Response) => {
     const blogs = BlogRepository.deleteBlog(req.params.id)
     if(!blogs){
         res.sendStatus(404)
@@ -32,7 +32,7 @@ blogRoute.put('/blogs/:id',authMiddleware,blogPostValidation(),(req: Request<Blo
     res.sendStatus(204)
 })
 
-blogRoute.get('/blogs/:id',blogPostValidation(),(req: Request<BlogParams>, res: Response) => {
+blogRoute.get('/blogs/:id',(req: Request<BlogParams>, res: Response) => {
     const id = req.params.id
     const blog = BlogRepository.getBlogsById(id)
 

@@ -28,7 +28,7 @@ exports.postRoute.put('/posts/:id', auth_middleware_1.authMiddleware, (0, post_v
     }
     res.sendStatus(204);
 });
-exports.postRoute.get('/posts/:id', auth_middleware_1.authMiddleware, (req, res) => {
+exports.postRoute.get('/posts/:id', (req, res) => {
     const id = req.params.id;
     const blog = post_repository_1.PostRepository.getPostById(id);
     if (!blog) {
