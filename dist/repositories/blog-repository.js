@@ -19,7 +19,7 @@ class BlogRepository {
     static deleteBlog(id) {
         let foundedIndexBlog = db_1.db.blogs.findIndex(b => b.id === id);
         db_1.db.blogs.splice(foundedIndexBlog, 1);
-        if (!foundedIndexBlog) {
+        if (foundedIndexBlog === -1) {
             return null;
         }
         return foundedIndexBlog;
