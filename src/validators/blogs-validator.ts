@@ -1,5 +1,6 @@
-import {body} from 'express-validator';
+import {body, param} from 'express-validator';
 import {inputModelValidation} from "../middlewares/input-model-validation/input-model-validation";
+export const idParamsValidation = param('id').exists().isString().trim().withMessage('Incorrect id')
 
 export const nameValidation = body('name').isString().trim().isLength({min: 1, max: 15}).withMessage('Incorrect name')
 
@@ -16,4 +17,4 @@ export const websiteUrlValidation = body('websiteUrl')
     .withMessage('Incorrect URL format');
 
 
-export const blogPostValidation = () => [nameValidation, descriptionValidation, websiteUrlValidation, inputModelValidation]
+export const blogPostValidation = () => [idParamsValidation,nameValidation, descriptionValidation, websiteUrlValidation, inputModelValidation]

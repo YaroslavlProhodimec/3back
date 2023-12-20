@@ -37,6 +37,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.postValidation = exports.blogNameValidation = exports.blogIdValidation = exports.contentValidation = exports.shortDescriptionValidation = exports.titleValidation = exports.idValidation = void 0;
 const express_validator_1 = require("express-validator");
 const input_model_validation_1 = require("../middlewares/input-model-validation/input-model-validation");
+const blogs_validator_1 = require("./blogs-validator");
 exports.idValidation = (0, express_validator_1.body)('id').exists().isString().trim().isLength({
     min: 1,
     max: 15
@@ -56,6 +57,6 @@ exports.blogIdValidation = (0, express_validator_1.body)('blogId').exists()
 exports.blogNameValidation = (0, express_validator_1.body)('blogName').exists()
     .isString().trim()
     .withMessage('Incorrect URL blogName');
-const postValidation = () => [exports.idValidation, exports.titleValidation, exports.shortDescriptionValidation,
+const postValidation = () => [blogs_validator_1.idParamsValidation, exports.idValidation, exports.titleValidation, exports.shortDescriptionValidation,
     exports.contentValidation, exports.blogIdValidation, exports.blogNameValidation, input_model_validation_1.inputModelValidation];
 exports.postValidation = postValidation;
