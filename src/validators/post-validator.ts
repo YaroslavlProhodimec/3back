@@ -57,12 +57,13 @@ export const contentValidation = body('content')
     .isLength({max:1000})
     .withMessage('Incorrect URL content');
 export const blogIdValidation = body('blogId')
-    // .exists()
+    .optional()
     .isLength({max:30})
     .isString().trim()
     .withMessage('Incorrect URL blogId');
 export const blogNameValidation = body('blogName')
     // .exists()
+
     .isString().trim()
     .withMessage('Incorrect URL blogName');
 

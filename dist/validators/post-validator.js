@@ -56,7 +56,7 @@ exports.contentValidation = (0, express_validator_1.body)('content')
     .isLength({ max: 1000 })
     .withMessage('Incorrect URL content');
 exports.blogIdValidation = (0, express_validator_1.body)('blogId')
-    // .exists()
+    .optional()
     .isLength({ max: 30 })
     .isString().trim()
     .withMessage('Incorrect URL blogId');
