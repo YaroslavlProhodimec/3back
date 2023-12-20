@@ -37,7 +37,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.postValidation = exports.blogNameValidation = exports.blogIdValidation = exports.contentValidation = exports.shortDescriptionValidation = exports.titleValidation = exports.idValidation = void 0;
 const express_validator_1 = require("express-validator");
 const input_model_validation_1 = require("../middlewares/input-model-validation/input-model-validation");
-exports.idValidation = (0, express_validator_1.body)('id').exists().isString().trim().isLength({
+exports.idValidation = (0, express_validator_1.body)('id')
+    // .exists()
+    .isString().trim().isLength({
     min: 1,
     max: 15
 }).withMessage('Incorrect id');
@@ -46,14 +48,17 @@ exports.shortDescriptionValidation = (0, express_validator_1.body)('shortDescrip
     .isString().trim()
     .isLength({ max: 100 })
     .withMessage('Incorrect URL shortDescription');
-exports.contentValidation = (0, express_validator_1.body)('content').exists()
+exports.contentValidation = (0, express_validator_1.body)('content')
+    .exists()
     .isString().trim()
     .isLength({ max: 1000 })
     .withMessage('Incorrect URL content');
-exports.blogIdValidation = (0, express_validator_1.body)('blogId').exists()
+exports.blogIdValidation = (0, express_validator_1.body)('blogId')
+    // .exists()
     .isString().trim()
     .withMessage('Incorrect URL blogId');
-exports.blogNameValidation = (0, express_validator_1.body)('blogName').exists()
+exports.blogNameValidation = (0, express_validator_1.body)('blogName')
+    // .exists()
     .isString().trim()
     .withMessage('Incorrect URL blogName');
 const postValidation = () => [exports.idValidation, exports.titleValidation, exports.shortDescriptionValidation,
