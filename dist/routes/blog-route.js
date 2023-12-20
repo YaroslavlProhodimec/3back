@@ -14,21 +14,21 @@ exports.blogRoute.post('/blogs', auth_middleware_1.authMiddleware, (0, blogs_val
     const blogs = blog_repository_1.BlogRepository.addBlog(req.body);
     res.status(201).send(blogs);
 });
-exports.blogRoute.delete('/blogs/:id', auth_middleware_1.authMiddleware, (0, blogs_validator_1.blogIdParamsValidation)(), (req, res) => {
+exports.blogRoute.delete('/blogs/:id', auth_middleware_1.authMiddleware, (req, res) => {
     const blogs = blog_repository_1.BlogRepository.deleteBlog(req.params.id);
     if (!blogs) {
         res.sendStatus(404);
     }
     res.sendStatus(204);
 });
-exports.blogRoute.put('/blogs/:id', auth_middleware_1.authMiddleware, (0, blogs_validator_1.blogPostValidation)(), (0, blogs_validator_1.blogIdParamsValidation)(), (req, res) => {
+exports.blogRoute.put('/blogs/:id', auth_middleware_1.authMiddleware, (0, blogs_validator_1.blogPostValidation)(), (req, res) => {
     const blogs = blog_repository_1.BlogRepository.updateBlogs(req.params.id, req.body);
     if (!blogs) {
         res.sendStatus(404);
     }
     res.sendStatus(204);
 });
-exports.blogRoute.get('/blogs/:id', (0, blogs_validator_1.blogIdParamsValidation)(), (req, res) => {
+exports.blogRoute.get('/blogs/:id', (req, res) => {
     const id = req.params.id;
     const blog = blog_repository_1.BlogRepository.getBlogsById(id);
     if (!blog) {
