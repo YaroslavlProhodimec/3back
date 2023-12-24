@@ -5,19 +5,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.app = void 0;
 const express_1 = __importDefault(require("express"));
-const blog_route_1 = require("./routes/blog-route");
-const post_route_1 = require("./routes/post-route");
-const db_1 = require("./db/db");
 exports.app = (0, express_1.default)();
 exports.app.use(express_1.default.json());
-exports.app.use(blog_route_1.blogRoute);
-exports.app.use(post_route_1.postRoute);
+// app.use(blogRoute)
+// app.use(postRoute)
 // /ht_02/api/testing/all-data
-exports.app.delete('/testing/all-data', (req, res) => {
-    (0, db_1.clearAllData)();
-    res.sendStatus(204);
-    // .send('All data is deleted');
-});
+// app.delete('/testing/all-data', (req: Request, res: Response) => {
+//     // clearAllData();
+//     res.sendStatus(204)
+//         // .send('All data is deleted');
+// })
+//
+//
 // app.get('/api/blogs', (req: Request, res: Response) => {
 //
 //     res.status(200).send(blogs)
